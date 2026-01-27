@@ -1,0 +1,17 @@
+# Private Environment Variables
+.env
+
+# Virtual Environment
+venv/
+env/
+
+# Personal Data (Your resume/profile)
+profile.json
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
