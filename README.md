@@ -266,6 +266,18 @@ By studying this project, you'll learn:
 5. **Error Handling**: Robust production-ready code
 6. **Logging**: Debugging and monitoring best practices
 
+## 🛠️ Developer Usage: Multiple Profiles
+
+The system is designed to be user-agnostic. To process a new candidate:
+
+1. **Extraction:**
+   `python main.py --resume candidate_b.pdf`
+   *This triggers the extraction layer and updates the local state.*
+
+2. **Targeted Execution:**
+   `python main.py --profile candidate_b.json --url [TARGET_URL]`
+   *Injects the specific candidate schema into the Agentic reasoning loop.*
+
 ---
 
 **Demo Form**: https://demo.automationtesting.in/Register.html  
