@@ -1,17 +1,31 @@
-# Private Environment Variables
+# Security
 .env
+.env.local
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # Virtual Environment
 venv/
 env/
+ENV/
 
-# Personal Data (Your resume/profile)
+# Generated files
 profile.json
+resume.pdf
+main_backup.py
+*.log
 
-# Python Cache
-__pycache__/
-*.pyc
+# Output folders
+logs/
+screenshots/
 
-# OS files
-.DS_Store
-Thumbs.db
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
