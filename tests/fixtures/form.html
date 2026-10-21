@@ -1,0 +1,116 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Test registration form</title></head>
+<body>
+<form id="register">
+  <div class="row">
+    <label class="control-label">Full Name*</label>
+    <div><input type="text" placeholder="First Name" required>
+         <input type="text" placeholder="Last Name" required></div>
+  </div>
+  <div class="row">
+    <label class="control-label">Address</label>
+    <div><textarea rows="3"></textarea></div>
+  </div>
+  <div class="row"><label for="email">Email address*</label><input id="email" type="email" required></div>
+  <div class="row"><label for="phone">Phone</label><input id="phone" type="tel"></div>
+  <div class="row">
+    <label class="control-label">Gender*</label>
+    <div><label><input type="radio" name="gender" value="Male">Male</label>
+         <label><input type="radio" name="gender" value="FeMale">Female</label></div>
+  </div>
+  <div class="row">
+    <label class="control-label">Preferred contact</label>
+    <div><label><input type="checkbox" name="contact" value="email">Email</label>
+         <label><input type="checkbox" name="contact" value="phone">Phone call</label>
+         <label><input type="checkbox" name="contact" value="sms">SMS</label></div>
+  </div>
+  <div class="row">
+    <label class="control-label">Languages</label>
+    <div><label><input type="checkbox" id="lang1" value="English">English</label>
+         <label><input type="checkbox" id="lang2" value="Hindi">Hindi</label></div>
+  </div>
+  <div class="row"><label for="region">Region</label>
+    <select id="region"><option value="">Select Region</option></select></div>
+  <div class="row"><label for="skills">Skills</label>
+    <select id="skills"><option value="">Select Skills</option><option>Java</option>
+      <option>Python</option><option>SQL</option></select></div>
+  <div class="row"><label for="country">Country</label>
+    <select id="country"><option value="">Select Country</option>
+          <option value="Afghanistan">Afghanistan</option>
+          <option value="Albania">Albania</option>
+          <option value="Algeria">Algeria</option>
+          <option value="Argentina">Argentina</option>
+          <option value="Australia">Australia</option>
+          <option value="Austria">Austria</option>
+          <option value="Bangladesh">Bangladesh</option>
+          <option value="Belgium">Belgium</option>
+          <option value="Bhutan">Bhutan</option>
+          <option value="Brazil">Brazil</option>
+          <option value="Canada">Canada</option>
+          <option value="Chile">Chile</option>
+          <option value="China">China</option>
+          <option value="Colombia">Colombia</option>
+          <option value="Croatia">Croatia</option>
+          <option value="Czechia">Czechia</option>
+          <option value="Denmark">Denmark</option>
+          <option value="Egypt">Egypt</option>
+          <option value="Estonia">Estonia</option>
+          <option value="Finland">Finland</option>
+          <option value="France">France</option>
+          <option value="Germany">Germany</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Greece">Greece</option>
+          <option value="Hungary">Hungary</option>
+          <option value="Iceland">Iceland</option>
+          <option value="India">India</option>
+          <option value="Indonesia">Indonesia</option>
+          <option value="Iran">Iran</option>
+          <option value="Iraq">Iraq</option>
+          <option value="Ireland">Ireland</option>
+          <option value="Israel">Israel</option>
+          <option value="Italy">Italy</option>
+          <option value="Japan">Japan</option>
+          <option value="Jordan">Jordan</option>
+          <option value="Kenya">Kenya</option>
+          <option value="Latvia">Latvia</option>
+          <option value="Lithuania">Lithuania</option>
+          <option value="Malaysia">Malaysia</option>
+          <option value="Mexico">Mexico</option>
+          <option value="Morocco">Morocco</option>
+          <option value="Nepal">Nepal</option>
+          <option value="Netherlands">Netherlands</option>
+          <option value="New Zealand">New Zealand</option>
+          <option value="Nigeria">Nigeria</option>
+          <option value="Norway">Norway</option>
+          <option value="Oman">Oman</option>
+          <option value="Pakistan">Pakistan</option>
+          <option value="Peru">Peru</option>
+          <option value="Philippines">Philippines</option>
+          <option value="Poland">Poland</option>
+          <option value="Portugal">Portugal</option>
+          <option value="Qatar">Qatar</option>
+          <option value="Romania">Romania</option>
+          <option value="Russia">Russia</option>
+          <option value="Saudi Arabia">Saudi Arabia</option>
+          <option value="Singapore">Singapore</option>
+          <option value="Slovakia">Slovakia</option>
+          <option value="South Africa">South Africa</option>
+          <option value="Spain">Spain</option>
+          <option value="Sri Lanka">Sri Lanka</option>
+          <option value="Sweden">Sweden</option>
+          <option value="Switzerland">Switzerland</option>
+          <option value="Thailand">Thailand</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Uganda">Uganda</option>
+          <option value="Ukraine">Ukraine</option>
+          <option value="United Kingdom">United Kingdom</option>
+          <option value="United States">United States</option>
+          <option value="Vietnam">Vietnam</option>
+    </select></div>
+  <div class="row"><label for="pw">Password</label><input id="pw" type="password"></div>
+  <div class="row"><label for="cv">Upload CV</label><input id="cv" type="file"></div>
+  <input type="hidden" name="token" value="abc">
+  <div class="row"><label><input type="checkbox" id="terms">I accept the terms</label></div>
+  <button type="submit">Submit</button>
+</form>
+</body></html>

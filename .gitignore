@@ -1,31 +1,11 @@
-# Security
 .env
-.env.local
-
-# Python cache
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-
-# Virtual Environment
+.pytest_cache/
+.venv/
 venv/
-env/
-ENV/
-
-# Generated files
-profile.json
-resume.pdf
-main_backup.py
-*.log
-
-# Output folders
 logs/
 screenshots/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+reports/
+profile.json
+*.pdf

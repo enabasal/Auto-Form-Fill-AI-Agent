@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>autoformfill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #eef0f3;
+    --sheet: #ffffff;
+    --print: #23272f;
+    --muted: #666c77;
+    --rule: #c9ced6;
+    --ink: #6b717c;
+    --red: #c2362b;
+    --red-wash: #fbeeec;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #181b20;
+      --sheet: #22262c;
+      --print: #e4e7ec;
+      --muted: #9aa1ac;
+      --rule: #3b414b;
+      --ink: #a3aab5;
+      --red: #f08176;
+      --red-wash: #3a2422;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--print);
+    font: 16px/1.5 "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  .page { max-width: 680px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  header {
+    display: flex; justify-content: space-between; align-items: baseline;
+    border-bottom: 1px solid var(--rule); padding-bottom: 10px; margin-bottom: 22px;
+  }
+  header h1 { font-size: 19px; margin: 0; }
+  .hint { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+
+  .layout { display: grid; }
+
+  .sheet {
+    background: var(--sheet);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 22px 24px 26px;
+  }
+  .sheet h2 { font-size: 17px; margin: 0 0 14px; }
+
+  /* Ruled form lines */
+  .lines { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; }
+  .line { display: flex; flex-direction: column; padding-top: 10px; }
+  .line.wide { grid-column: 1 / -1; }
+  .line label { font-size: 13px; color: var(--print); }
+  .line input {
+    font: inherit;
+    color: var(--ink);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--rule);
+    border-radius: 0;
+    padding: 3px 0 5px;
+    width: 100%;
+  }
+  .line input::placeholder { color: var(--rule); }
+  .line input:focus { outline: none; border-bottom: 2px solid var(--print); padding-bottom: 4px; }
+
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; }
+  .actions { margin-top: 22px; }
+
+  button, .file-button {
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 3px;
+    padding: 8px 16px;
+    border: 1px solid var(--print);
+    background: var(--print);
+    color: var(--sheet);
+  }
+  button.secondary, .file-button {
+    background: transparent;
+    color: var(--print);
+  }
+  button:disabled { opacity: .55; cursor: progress; }
+  button:focus-visible, .file-button:focus-within {
+    outline: 2px solid var(--print);
+    outline-offset: 2px;
+  }
+  .file-button input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+
+  .status { color: var(--muted); font-size: 15px; min-height: 1.5em; }
+  .status.saved { color: var(--muted); }
+
+  .error {
+    border-left: 3px solid var(--red);
+    background: var(--red-wash);
+    color: var(--print);
+    padding: 10px 14px;
+    margin-top: 16px;
+  }
+
+
+
+
+
+  @media (max-width: 520px) {
+    .lines { grid-template-columns: 1fr; }
+      .sheet { padding: 18px 16px 22px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>autoformfill</h1>
+  </header>
+
+  <div class="layout">
+    <section class="sheet" aria-labelledby="details-title">
+      <h2 id="details-title">Your details</h2>
+
+      <div class="row">
+        <label class="file-button">
+          Read resume (PDF)
+          <input type="file" id="resume" accept="application/pdf,.pdf">
+        </label>
+        <span class="status" id="details-status" aria-live="polite"></span>
+      </div>
+      <p class="hint">Or type them in. Saved to profile.json.</p>
+      <div class="error" id="details-error" hidden></div>
+
+      <form id="details" autocomplete="off" novalidate>
+        <div class="lines">
+          <div class="line"><label for="first_name">First name</label><input id="first_name"></div>
+          <div class="line"><label for="last_name">Last name</label><input id="last_name"></div>
+          <div class="line wide"><label for="email">Email</label><input id="email" type="email"></div>
+          <div class="line"><label for="phone">Phone</label><input id="phone" type="tel"></div>
+          <div class="line"><label for="postal_code">Postal code</label><input id="postal_code"></div>
+          <div class="line wide"><label for="address">Address</label><input id="address"></div>
+          <div class="line"><label for="city">City</label><input id="city"></div>
+          <div class="line"><label for="state">State</label><input id="state"></div>
+          <div class="line wide"><label for="country">Country</label><input id="country"></div>
+          <div class="line wide"><label for="linkedin_url">LinkedIn</label><input id="linkedin_url" type="url"></div>
+          <div class="line wide"><label for="github_url">GitHub</label><input id="github_url" type="url"></div>
+          <div class="line wide"><label for="skills">Skills</label><input id="skills" placeholder="Separate with commas"></div>
+        </div>
+        <div class="row actions">
+          <button type="submit" class="secondary" id="save">Save details</button>
+        </div>
+      </form>
+    </section>
+
+  </div>
+</div>
+
+<script>
+const FIELDS = ["first_name", "last_name", "email", "phone", "postal_code", "address",
+                "city", "state", "country", "linkedin_url", "github_url"];
+let profile = null;
+
+const $ = id => document.getElementById(id);
+
+async function api(path, options = {}) {
+  const res = await fetch(path, options);
+  let body = null;
+  try { body = await res.json(); } catch (_) { /* empty or not JSON */ }
+  if (!res.ok) throw new Error((body && body.detail) || `The server answered ${res.status}.`);
+  return body;
+}
+
+function showError(id, message) {
+  const box = $(id);
+  box.textContent = message || "";
+  box.hidden = !message;
+}
+
+function fillDetails(p) {
+  profile = p;
+  for (const key of FIELDS) $(key).value = p ? (p[key] || "") : "";
+  $("skills").value = p ? (p.skills || []).join(", ") : "";
+}
+
+function readDetails() {
+  const data = { ...(profile || {}) };
+  for (const key of FIELDS) data[key] = $(key).value.trim();
+  data.skills = $("skills").value.split(",").map(s => s.trim()).filter(Boolean);
+  return data;
+}
+
+async function loadProfile() {
+  try {
+    const { profile: p } = await api("/api/profile");
+    fillDetails(p);
+    $("details-status").textContent = p ? "" : "Nothing saved yet.";
+  } catch (err) {
+    showError("details-error", err.message);
+  }
+}
+
+$("resume").addEventListener("change", async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  showError("details-error", "");
+  $("details-status").className = "status";
+  $("details-status").textContent = `Reading ${file.name}…`;
+  const form = new FormData();
+  form.append("file", file);
+  try {
+    const { profile: p } = await api("/api/resume", { method: "POST", body: form });
+    fillDetails(p);
+    $("details-status").className = "status saved";
+    $("details-status").textContent = "Done, check the fields below.";
+  } catch (err) {
+    $("details-status").textContent = "";
+    showError("details-error", err.message);
+  } finally {
+    event.target.value = "";
+  }
+});
+
+$("details").addEventListener("submit", async event => {
+  event.preventDefault();
+  showError("details-error", "");
+  $("save").disabled = true;
+  try {
+    const { profile: p } = await api("/api/profile", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(readDetails()),
+    });
+    fillDetails(p);
+    $("details-status").className = "status saved";
+    $("details-status").textContent = "Saved.";
+  } catch (err) {
+    showError("details-error", err.message);
+  } finally {
+    $("save").disabled = false;
+  }
+});
+
+loadProfile();
+</script>
+</body>
+</html>
