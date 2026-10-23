@@ -159,7 +159,9 @@
         </div>
         <div class="row actions">
           <button type="submit" class="secondary" id="save">Save details</button>
+          <span class="status" id="save-status" aria-live="polite"></span>
         </div>
+        <div class="error" id="save-error" hidden></div>
       </form>
     </section>
 
@@ -233,7 +235,8 @@ $("resume").addEventListener("change", async event => {
 
 $("details").addEventListener("submit", async event => {
   event.preventDefault();
-  showError("details-error", "");
+  showError("save-error", "");
+  $("save-status").textContent = "Saving…";
   $("save").disabled = true;
   try {
     const { profile: p } = await api("/api/profile", {
@@ -242,10 +245,12 @@ $("details").addEventListener("submit", async event => {
       body: JSON.stringify(readDetails()),
     });
     fillDetails(p);
-    $("details-status").className = "status saved";
-    $("details-status").textContent = "Saved.";
+    $("save-status").textContent = `Saved at ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
   } catch (err) {
-    showError("details-error", err.message);
+    $("save-status").textContent = "";
+    showError("save-error", err.message.includes("Failed to fetch")
+      ? "Couldn't reach the server. Is python main.py serve still running?"
+      : err.message);
   } finally {
     $("save").disabled = false;
   }
